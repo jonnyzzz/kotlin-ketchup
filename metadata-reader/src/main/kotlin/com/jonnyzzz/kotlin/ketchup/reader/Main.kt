@@ -49,7 +49,7 @@ object Main {
     val classes = ClasspathScanner.iterateClasspath(params)
 
     classes.classFiles.forEach {
-      ClassesParser().parseClass(Files.readAllBytes(it))
+      TheDeclarationsParser().parseClass(Files.readAllBytes(it))
     }
   }
 }
