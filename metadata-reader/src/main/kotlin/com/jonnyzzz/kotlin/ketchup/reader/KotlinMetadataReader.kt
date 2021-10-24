@@ -70,11 +70,37 @@ object KotlinMetadataReader {
     }
 
     override fun visitEnum(name: String?, descriptor: String?, value: String?) {
-      error("Visit of enum value is not implemented: $name, $descriptor, $value")
+      error("Visit enum value is not implemented: $name, $descriptor, $value")
+    }
+
+    override fun visitArray(outerName: String): AnnotationVisitor {
+      val r = mutableListOf<Any?>()
+      val that = this
+      return object : AnnotationVisitor(Opcodes.ASM9) {
+        override fun visit(name: String?, value: Any?) {
+          r += value
+        }
+
+        override fun visitEnum(name: String?, descriptor: String?, value: String?) {
+          error("Visit nested enum value is not implemented: $name, $descriptor")
+        }
+
+        override fun visitAnnotation(name: String?, descriptor: String?): AnnotationVisitor {
+          error("Visit nested annotation value is not implemented: $name, $descriptor")
+        }
+
+        override fun visitArray(name: String?): AnnotationVisitor {
+          error("Visit nested array value is not implemented: $name")
+        }
+
+        override fun visitEnd() {
+          that.visit(outerName, r.toTypedArray())
+        }
+      }
     }
 
     override fun visitAnnotation(name: String?, descriptor: String?): AnnotationVisitor? {
-      error("Visit of enum value is not implemented: $name, $descriptor")
+      error("Visit annotation value is not implemented: $name, $descriptor")
     }
 
     override fun visitEnd() {

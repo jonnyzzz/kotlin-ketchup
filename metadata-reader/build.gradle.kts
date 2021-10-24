@@ -9,6 +9,7 @@ dependencies {
 
   implementation("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.3.0")
 
+  implementation("com.squareup:kotlinpoet-metadata:1.10.2")
   implementation("com.squareup:kotlinpoet:1.10.2")
 }
 
