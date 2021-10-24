@@ -1,6 +1,11 @@
 # kotlin-ketchup
 A project aiming to generate KMP declarations from several library versions
 
+# LICENSE
+Apache 2.0. See ./LICENSE in this repository
+
+See the ./NOTICE for more details on the third-party sources or libraries that we use
+
 # Why
 
 Assume one does a library or a plugin that has to be compatible with
