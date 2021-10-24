@@ -7,4 +7,10 @@ class IntegrationTest {
   fun testOnSelfClasspath() {
     AppMain.main("--classpath=${System.getProperty("java.class.path")}")
   }
+
+  @Test
+  fun testOnTestData01() {
+    val path = System.getProperty("ketchup.testData01")!!
+    AppMain.main("--classpath=$path")
+  }
 }
