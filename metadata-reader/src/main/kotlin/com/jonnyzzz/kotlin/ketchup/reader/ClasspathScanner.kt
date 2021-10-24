@@ -6,10 +6,14 @@ import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.streams.asSequence
 
-object Reader {
-  private val LOG = LoggerFactory.getLogger(Reader::class.java)
+data class ClasspathScanResult(
+  val classFiles: List<Path>
+)
 
-  fun iterateClasspath(params: ReaderParameters) {
+object ClasspathScanner {
+  private val LOG = LoggerFactory.getLogger(ClasspathScanner::class.java)
+
+  fun iterateClasspath(params: ReaderParameters) : ClasspathScanResult {
     val allFiles = params.classpath.asSequence()
       .flatMap(::unwrapArchives)
       .flatMap(::listDirectories)
@@ -23,6 +27,7 @@ object Reader {
       .toList()
 
     LOG.info("Found {} class files in the classpath", allClassFiles.size)
+    return ClasspathScanResult(allClassFiles)
   }
 
   private fun listDirectories(path: Path): Sequence<Path> {

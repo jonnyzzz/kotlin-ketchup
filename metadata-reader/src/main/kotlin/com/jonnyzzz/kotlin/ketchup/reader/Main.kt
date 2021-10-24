@@ -1,6 +1,7 @@
 package com.jonnyzzz.kotlin.ketchup.reader
 
 import com.jonnyzzz.args.ArgsParser
+import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.system.exitProcess
 
@@ -45,6 +46,10 @@ object Main {
 
     println("Params: $params")
 
-    Reader.iterateClasspath(params)
+    val classes = ClasspathScanner.iterateClasspath(params)
+
+    classes.classFiles.forEach {
+      ClassesParser().parseClass(Files.readAllBytes(it))
+    }
   }
 }
