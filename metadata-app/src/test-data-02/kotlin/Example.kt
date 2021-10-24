@@ -10,3 +10,4 @@ fun thisIsGlobFun(): ThisIsKotlinInterface = TODO()
 
 val thisIsGlobVal get() = ThisIsKotlinObject
 
+typealias KotlinAlias = ThisIsKotlinInterface
