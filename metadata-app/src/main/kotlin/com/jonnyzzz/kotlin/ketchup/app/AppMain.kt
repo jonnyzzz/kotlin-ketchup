@@ -1,15 +1,14 @@
-package com.jonnyzzz.kotlin.ketchup.reader
+package com.jonnyzzz.kotlin.ketchup.app
 
 import com.jonnyzzz.args.ArgsParser
+import com.jonnyzzz.kotlin.ketchup.reader.ClasspathScanner
+import com.jonnyzzz.kotlin.ketchup.reader.ReaderParameters
+import com.jonnyzzz.kotlin.ketchup.reader.TheDeclarationsParser
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.system.exitProcess
 
-interface ReaderParameters {
-  val classpath: List<Path>
-}
-
-class ArgsImpl(parser: ArgsParser) : ReaderParameters{
+private class ArgsImpl(parser: ArgsParser) : ReaderParameters {
   override val classpath by parser
     .arg("classpath", "specify classpath elements to read declarations")
     .strings()
@@ -30,7 +29,7 @@ class ArgsImpl(parser: ArgsParser) : ReaderParameters{
   }
 }
 
-object Main {
+object AppMain {
   @JvmStatic
   fun main(vararg args: String) {
     println("Running Kotlin Ketchup...")
