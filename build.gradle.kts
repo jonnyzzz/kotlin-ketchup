@@ -37,5 +37,8 @@ subprojects {
   dependencies {
     testImplementation(platform("org.junit:junit-bom:5.8.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
+    implementation("org.slf4j:slf4j-api:1.7.32")
+    testImplementation("org.slf4j:slf4j-simple:1.7.32")
   }
 }
